@@ -10,15 +10,10 @@ import SwiftUI
 struct FlashcardGameView: View {
     @ObservedObject var gameManager: GameManager
     @State private var rotation: Double = 0
-    @State private var showAnswer = false
     
     var currentGame: GameCard? {
         guard gameManager.currentCardIndex < gameManager.gameCards.count else { return nil }
         return gameManager.gameCards[gameManager.currentCardIndex]
-    }
-    
-    var isFlipped: Bool {
-        return rotation > 90
     }
     
     var body: some View {
@@ -49,8 +44,8 @@ struct FlashcardGameView: View {
                             .shadow(radius: 10)
                         
                         VStack(spacing: 20) {
-                            if !isFlipped {
-                                // Front Side - Italian Word
+                            if !gameManager.showResult {
+                                // Front Side - Italian Word (Cannot tap)
                                 Text("Italian Word")
                                     .font(.caption)
                                     .foregroundColor(.white.opacity(0.7))
@@ -64,12 +59,12 @@ struct FlashcardGameView: View {
                                 Divider()
                                     .background(.white.opacity(0.3))
                                 
-                                Text("Tap to reveal answer")
+                                Text("Select an answer to reveal")
                                     .font(.system(.body, design: .rounded))
                                     .foregroundColor(.white.opacity(0.6))
                             } else {
-                                // Back Side - Answer
-                                Text("Answer")
+                                // Back Side - Answer (Revealed after selection)
+                                Text("   ")
                                     .font(.caption)
                                     .foregroundColor(.white.opacity(0.7))
                                 
@@ -87,12 +82,10 @@ struct FlashcardGameView: View {
                         .degrees(rotation),
                         axis: (x: 0, y: 1, z: 0)
                     )
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.6)) {
-                            if rotation == 0 {
+                    .onChange(of: gameManager.showResult) { showResult in
+                        if showResult {
+                            withAnimation(.easeInOut(duration: 0.6)) {
                                 rotation = 180
-                            } else {
-                                rotation = 0
                             }
                         }
                     }

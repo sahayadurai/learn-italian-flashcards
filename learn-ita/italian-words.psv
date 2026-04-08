@@ -1,52 +1,212 @@
-Italian|English
-Ciao|Hello/Goodbye
-Amore|Love
-Gatto|Cat
-Cane|Dog
-Casa|House
-Sole|Sun
-Luna|Moon
-Libro|Book
-Tavolo|Table
-Sedia|Chair
-Acqua|Water
-Pane|Bread
-Formaggio|Cheese
-Vino|Wine
-Pizza|Pizza
-Pasta|Pasta
-Gelato|Ice cream
-Dolce|Sweet
-Amico|Friend
-Famiglia|Family
-Letto|Bed
-Finestra|Window
-Porta|Door
-Cielo|Sky
-Terra|Earth
-Fuoco|Fire
-Stella|Star
-Fiore|Flower
-Albero|Tree
-Montagna|Mountain
-Mare|Sea
-Spiaggia|Beach
-Strada|Street
-Macchina|Car
-Treno|Train
-Aereo|Airplane
-Bicicletta|Bicycle
-Telefono|Phone
-Computer|Computer
-Musica|Music
-Danza|Dance
-Canzone|Song
-Voce|Voice
-Mano|Hand
-Piede|Foot
-Occhio|Eye
-Naso|Nose
-Bocca|Mouth
-Orecchio|Ear
-Testa|Head
-Cuore|Heart
+italian|english
+ciao|hello/goodbye
+grazie|thank you
+prego|you're welcome
+per favore|please
+sì|yes
+no|no
+uomo|man
+donna|woman
+bambino|child
+amico|friend
+famiglia|family
+casa|house
+scuola|school
+città|city
+tempo|time/weather
+giorno|day
+notte|night
+acqua|water
+pane|bread
+vino|wine
+cibo|food
+ristorante|restaurant
+strada|street
+macchina|car
+lavoro|work
+denaro|money
+amore|love
+vita|life
+mondo|world
+sole|sun
+luna|moon
+mare|sea
+montagna|mountain
+libro|book
+penna|pen
+porta|door
+finestra|window
+tavolo|table
+sedia|chair
+letto|bed
+telefono|phone
+computer|computer
+internet|internet
+musica|music
+film|movie
+gioco|game
+sport|sport
+calcio|soccer
+correre|to run
+mangiare|to eat
+bere|to drink
+andare|to go
+venire|to come
+fare|to do/make
+dire|to say
+vedere|to see
+trovare|to find
+pensare|to think
+sapere|to know (fact)
+conoscere|to know (person/place)
+volere|to want
+potere|can/may
+dovere|must/have to
+aprire|to open
+chiudere|to close
+entrare|to enter
+uscire|to exit
+comprare|to buy
+pagare|to pay
+parlare|to speak
+ascoltare|to listen
+leggere|to read
+scrivere|to write
+studiare|to study
+imparare|to learn
+insegnare|to teach
+viaggiare|to travel
+arrivare|to arrive
+partire|to leave/depart
+restare|to stay
+abitare|to live/reside
+guidare|to drive
+camminare|to walk
+guardare|to watch/look
+credere|to believe
+sperare|to hope
+ricordare|to remember
+dimenticare|to forget
+aprile|April
+gennaio|January
+estate|summer
+inverno|winter
+oggi|today
+domani|tomorrow
+ieri|yesterday
+sempre|always
+spesso|often
+a volte|sometimes
+mai|never
+qui|here
+lì|there
+perché|why/because
+come|how
+quanto|how much
+chi|who
+cosa|what
+abbagliare|to dazzle
+accantonare|to set aside
+acume|keen insight
+affanno|breathlessness/anxiety
+aggirare|to circumvent
+alacre|diligent
+alterco|quarrel
+annichilire|to annihilate
+annoverare|to include
+anteporre|to put before
+appurare|to ascertain
+arduo|arduous
+arrendevole|yielding
+assennato|sensible
+avveduto|prudent
+avvilire|to discourage
+balenare|to flash (idea)
+beffardo|mocking
+bizzarro|bizarre
+bramoso|eager
+caduco|fleeting
+calzante|fitting/appropriate
+caparbio|stubborn
+carpire|to extort/extract
+cauto|cautious
+celere|swift
+censurare|to censor
+circoscritto|limited
+cogente|compelling
+colmare|to fill up
+conciso|concise
+conferire|to confer
+congetturare|to conjecture
+connaturato|innate
+consueto|usual
+corroborare|to strengthen
+coscienzioso|conscientious
+declinare|to decline
+deferente|respectful
+deliberare|to deliberate
+denigrare|to denigrate
+desueto|obsolete
+detrarre|to deduct
+diligere|to esteem
+disdegnare|to disdain
+disgiunto|separate
+dissennato|reckless
+docile|docile
+edulcorare|to sweeten/soften
+effimero|ephemeral
+elargire|to bestow
+eloquente|eloquent
+emanare|to emanate
+emulare|to emulate
+encomiabile|praiseworthy
+esacerbare|to exacerbate
+esiguo|scant
+esimere|to exempt
+esortare|to exhort
+esternare|to express
+eterogeneo|heterogeneous
+evincere|to deduce
+farraginoso|cumbersome
+fastidioso|annoying
+ferreo|iron/strict
+forviante|misleading
+frangente|moment/critical juncture
+fruire|to enjoy/use
+fulgido|shining
+garrulo|talkative
+gravoso|burdensome
+illustre|illustrious
+impartire|to impart
+impervio|impervious/rough
+impeto|impetus
+incombente|impending
+indugiare|to linger
+ineffabile|ineffable
+inermi|defenseless
+infausto|ill-fated
+ingente|vast
+insidioso|insidious
+intrepido|fearless
+intrinseco|intrinsic
+irruento|impetuous
+laconico|laconic
+lampante|evident
+lusingare|to flatter
+macchinoso|complicated
+malcelato|barely concealed
+mellifluo|honeyed/smooth
+meramente|merely
+minuzioso|meticulous
+nefasto|ominous
+obliare|to forget
+oculato|careful
+oneroso|burdensome
+opprimere|to oppress
+ostentare|to flaunt
+palese|evident
+parimenti|likewise
+perentorio|peremptory
+pervadere|to pervade
+pletorico|excessive
+ponderare|to ponder

@@ -84,7 +84,7 @@ struct PracticeView: View {
                                 }
                             } else {
                                 // Back Side - Meaning
-                                Text("...")
+                                Text("   ")
                                     .font(.caption)
                                     .foregroundColor(.white.opacity(0.7))
                                 
