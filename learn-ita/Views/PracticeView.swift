@@ -12,7 +12,10 @@ struct PracticeView: View {
     @State private var shuffledCards: [Flashcard] = []
     @State private var currentIndex = 0
     @State private var rotation: Double = 0
-    @State private var showAnswer = false
+    
+    var isFlipped: Bool {
+        return rotation > 90
+    }
     
     var body: some View {
         ZStack {
@@ -55,32 +58,21 @@ struct PracticeView: View {
                             .shadow(radius: 10)
                         
                         VStack(spacing: 20) {
-                            Text("Italian Word")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.7))
-                            
-                            Text(currentCard.italian)
-                                .font(.system(size: 56, weight: .bold, design: .default))
-                                .foregroundColor(.white)
-                                .minimumScaleFactor(0.5)
-                                .lineLimit(2)
-                            
-                            Divider()
-                                .background(.white.opacity(0.3))
-                            
-                            if showAnswer {
-                                VStack(spacing: 10) {
-                                    Text("Meaning")
-                                        .font(.caption)
-                                        .foregroundColor(.white.opacity(0.7))
-                                    
-                                    Text(currentCard.english)
-                                        .font(.system(size: 36, weight: .semibold))
-                                        .foregroundColor(.yellow)
-                                        .lineLimit(3)
-                                        .minimumScaleFactor(0.8)
-                                }
-                            } else {
+                            if !isFlipped {
+                                // Front Side - Italian Word
+                                Text("Italian Word")
+                                    .font(.caption)
+                                    .foregroundColor(.white.opacity(0.7))
+                                
+                                Text(currentCard.italian)
+                                    .font(.system(size: 56, weight: .bold, design: .default))
+                                    .foregroundColor(.white)
+                                    .minimumScaleFactor(0.5)
+                                    .lineLimit(2)
+                                
+                                Divider()
+                                    .background(.white.opacity(0.3))
+                                
                                 VStack(spacing: 15) {
                                     Image(systemName: "hand.tap")
                                         .font(.system(size: 32))
@@ -90,6 +82,17 @@ struct PracticeView: View {
                                         .font(.system(.body, design: .rounded))
                                         .foregroundColor(.white.opacity(0.6))
                                 }
+                            } else {
+                                // Back Side - Meaning
+                                Text("Meaning")
+                                    .font(.caption)
+                                    .foregroundColor(.white.opacity(0.7))
+                                
+                                Text(currentCard.english)
+                                    .font(.system(size: 36, weight: .semibold))
+                                    .foregroundColor(.yellow)
+                                    .lineLimit(3)
+                                    .minimumScaleFactor(0.8)
                             }
                         }
                         .padding(30)
@@ -100,8 +103,11 @@ struct PracticeView: View {
                     )
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.6)) {
-                            rotation += 180
-                            showAnswer.toggle()
+                            if rotation == 0 {
+                                rotation = 180
+                            } else {
+                                rotation = 0
+                            }
                         }
                     }
                     .padding()
@@ -161,7 +167,6 @@ struct PracticeView: View {
         if currentIndex < shuffledCards.count - 1 {
             withAnimation {
                 rotation = 0
-                showAnswer = false
                 currentIndex += 1
             }
         }
@@ -171,7 +176,6 @@ struct PracticeView: View {
         if currentIndex > 0 {
             withAnimation {
                 rotation = 0
-                showAnswer = false
                 currentIndex -= 1
             }
         }
@@ -182,7 +186,6 @@ struct PracticeView: View {
             shuffledCards.shuffle()
             currentIndex = 0
             rotation = 0
-            showAnswer = false
         }
     }
 }

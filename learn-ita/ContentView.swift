@@ -81,14 +81,6 @@ struct ContentView: View {
                                 color: Color.orange
                             )
                         }
-                        
-                        // Stats Card
-                        MenuCard(
-                            title: "Vocabulary",
-                            subtitle: "\(cardStore.cards.count) Italian words available",
-                            icon: "book.fill",
-                            color: Color.green
-                        )
                     }
                     .padding(24)
                     

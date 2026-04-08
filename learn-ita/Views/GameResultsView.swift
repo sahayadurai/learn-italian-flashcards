@@ -90,7 +90,7 @@ struct GameResultsView: View {
                 
                 Spacer()
                 
-                // Action Buttons
+                // Action Button
                 VStack(spacing: 12) {
                     Button(action: {
                         gameManager.resetGame()
@@ -103,21 +103,6 @@ struct GameResultsView: View {
                         .frame(maxWidth: .infinity)
                         .padding(16)
                         .background(.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        .font(.headline)
-                    }
-                    
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        HStack {
-                            Image(systemName: "house.fill")
-                            Text("Back to Menu")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(16)
-                        .background(.blue)
                         .foregroundColor(.white)
                         .cornerRadius(12)
                         .font(.headline)
@@ -145,7 +130,7 @@ struct ScoreRow: View {
                     .frame(width: 12, height: 12)
                 
                 Text(label)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.primary)
             }
             
             Spacer()

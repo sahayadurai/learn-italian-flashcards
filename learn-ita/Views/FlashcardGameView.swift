@@ -17,6 +17,10 @@ struct FlashcardGameView: View {
         return gameManager.gameCards[gameManager.currentCardIndex]
     }
     
+    var isFlipped: Bool {
+        return rotation > 90
+    }
+    
     var body: some View {
         ZStack {
             VStack(spacing: 20) {
@@ -45,33 +49,35 @@ struct FlashcardGameView: View {
                             .shadow(radius: 10)
                         
                         VStack(spacing: 20) {
-                            Text("Italian Word")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.7))
-                            
-                            Text(currentGame.flashcard.italian)
-                                .font(.system(size: 48, weight: .bold, design: .default))
-                                .foregroundColor(.white)
-                                .minimumScaleFactor(0.5)
-                                .lineLimit(2)
-                            
-                            Divider()
-                                .background(.white.opacity(0.3))
-                            
-                            if showAnswer {
-                                VStack(spacing: 10) {
-                                    Text("Answer")
-                                        .font(.caption)
-                                        .foregroundColor(.white.opacity(0.7))
-                                    
-                                    Text(currentGame.flashcard.english)
-                                        .font(.system(size: 32, weight: .semibold))
-                                        .foregroundColor(.yellow)
-                                }
-                            } else {
+                            if !isFlipped {
+                                // Front Side - Italian Word
+                                Text("Italian Word")
+                                    .font(.caption)
+                                    .foregroundColor(.white.opacity(0.7))
+                                
+                                Text(currentGame.flashcard.italian)
+                                    .font(.system(size: 48, weight: .bold, design: .default))
+                                    .foregroundColor(.white)
+                                    .minimumScaleFactor(0.5)
+                                    .lineLimit(2)
+                                
+                                Divider()
+                                    .background(.white.opacity(0.3))
+                                
                                 Text("Tap to reveal answer")
                                     .font(.system(.body, design: .rounded))
                                     .foregroundColor(.white.opacity(0.6))
+                            } else {
+                                // Back Side - Answer
+                                Text("Answer")
+                                    .font(.caption)
+                                    .foregroundColor(.white.opacity(0.7))
+                                
+                                Text(currentGame.flashcard.english)
+                                    .font(.system(size: 36, weight: .semibold))
+                                    .foregroundColor(.yellow)
+                                    .lineLimit(3)
+                                    .minimumScaleFactor(0.8)
                             }
                         }
                         .padding(30)
@@ -82,8 +88,11 @@ struct FlashcardGameView: View {
                     )
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.6)) {
-                            rotation += 180
-                            showAnswer.toggle()
+                            if rotation == 0 {
+                                rotation = 180
+                            } else {
+                                rotation = 0
+                            }
                         }
                     }
                     .padding(.horizontal)
@@ -127,7 +136,6 @@ struct FlashcardGameView: View {
                             Button(action: {
                                 withAnimation {
                                     rotation = 0
-                                    showAnswer = false
                                     gameManager.nextCard()
                                 }
                             }) {
