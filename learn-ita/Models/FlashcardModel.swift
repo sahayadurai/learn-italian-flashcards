@@ -104,22 +104,26 @@ class GameManager: ObservableObject {
                 }
                 let retryCards = self.cardStore.getRandomCards(count: self.totalCards)
                 self.gameCards = retryCards.map { card in
-                    let wrongAnswers = self.cardStore.getRandomWrongAnswers(excludingCorrect: card.english, count: 2)
-                    var options = wrongAnswers + [card.english]
-                    options.shuffle()
-                    
-                    return GameCard(flashcard: card, options: options, correctAnswer: card.english)
+                    return GameCard(flashcard: card, options: self.createRandomizedOptions(correctAnswer: card.english), correctAnswer: card.english)
                 }
             }
         } else {
             gameCards = selectedCards.map { card in
-                let wrongAnswers = cardStore.getRandomWrongAnswers(excludingCorrect: card.english, count: 2)
-                var options = wrongAnswers + [card.english]
-                options.shuffle()
-                
-                return GameCard(flashcard: card, options: options, correctAnswer: card.english)
+                return GameCard(flashcard: card, options: self.createRandomizedOptions(correctAnswer: card.english), correctAnswer: card.english)
             }
         }
+    }
+    
+    private func createRandomizedOptions(correctAnswer: String) -> [String] {
+        let wrongAnswers = cardStore.getRandomWrongAnswers(excludingCorrect: correctAnswer, count: 2)
+        var allAnswers = wrongAnswers + [correctAnswer]
+        
+        // Shuffle multiple times for better randomization
+        for _ in 0..<3 {
+            allAnswers.shuffle()
+        }
+        
+        return allAnswers
     }
     
     func submitAnswer(_ answer: String) {

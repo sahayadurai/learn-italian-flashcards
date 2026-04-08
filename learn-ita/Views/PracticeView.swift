@@ -84,7 +84,7 @@ struct PracticeView: View {
                                 }
                             } else {
                                 // Back Side - Meaning
-                                Text("Meaning")
+                                Text("...")
                                     .font(.caption)
                                     .foregroundColor(.white.opacity(0.7))
                                 
@@ -93,6 +93,7 @@ struct PracticeView: View {
                                     .foregroundColor(.yellow)
                                     .lineLimit(3)
                                     .minimumScaleFactor(0.8)
+                                    .scaleEffect(x: -1, y: 1, anchor: .center)
                             }
                         }
                         .padding(30)

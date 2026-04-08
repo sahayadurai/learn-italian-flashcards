@@ -98,7 +98,7 @@ struct GameResultsView: View {
                     }) {
                         HStack {
                             Image(systemName: "arrow.clockwise")
-                            Text("Try Again")
+                            Text("Play Again?")
                         }
                         .frame(maxWidth: .infinity)
                         .padding(16)
