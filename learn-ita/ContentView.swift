@@ -6,81 +6,150 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @StateObject private var cardStore = FlashcardStore()
+    @StateObject private var gameManager: GameManager
+    @State private var showGameView = false
+    @State private var showPracticeView = false
+    
+    init() {
+        let store = FlashcardStore()
+        _cardStore = StateObject(wrappedValue: store)
+        _gameManager = StateObject(wrappedValue: GameManager(cardStore: store))
+    }
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [.blue.opacity(0.1), .purple.opacity(0.1)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    // Header
+                    VStack(spacing: 10) {
+                        Text("Learn Italian")
+                            .font(.system(size: 44, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        
+                        Text("Master vocabulary with flashcards")
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    .frame(maxWidth: .infinity)
+                    .padding(30)
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [.blue, .purple]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    
+                    Spacer()
+                    
+                    // Main Menu
+                    VStack(spacing: 16) {
+                        // Game Mode Card
+                        NavigationLink(destination: NavigationView {
+                            ZStack {
+                                if gameManager.gameOver {
+                                    GameResultsView(gameManager: gameManager)
+                                } else {
+                                    FlashcardGameView(gameManager: gameManager)
+                                }
+                            }
+                        }) {
+                            MenuCard(
+                                title: "Play Game",
+                                subtitle: "Answer 10 questions with multiple choice",
+                                icon: "gamecontroller.fill",
+                                color: Color.blue
+                            )
+                        }
+                        
+                        // Practice Mode Card
+                        NavigationLink(destination: PracticeView(cardStore: cardStore)) {
+                            MenuCard(
+                                title: "Practice Mode",
+                                subtitle: "Browse and flip through flashcards",
+                                icon: "books.vertical.fill",
+                                color: Color.orange
+                            )
+                        }
+                        
+                        // Stats Card
+                        MenuCard(
+                            title: "Vocabulary",
+                            subtitle: "\(cardStore.cards.count) Italian words available",
+                            icon: "book.fill",
+                            color: Color.green
+                        )
                     }
+                    .padding(24)
+                    
+                    Spacer()
+                    
+                    // Footer
+                    VStack(spacing: 8) {
+                        Text("Tip: Tap the flashcard to flip and reveal the answer!")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding()
                 }
             }
-            Text("Select an item")
+            .navigationBarHidden(true)
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+        .navigationViewStyle(.stack)
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
+struct MenuCard: View {
+    let title: String
+    let subtitle: String
+    let icon: String
+    let color: Color
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+                    .frame(width: 50, height: 50)
+                    .background(color)
+                    .cornerRadius(12)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.headline)
+                        .foregroundColor(.black)
+                    
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .lineLimit(2)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.gray)
+            }
+        }
+        .padding(16)
+        .background(.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+}
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
 }
