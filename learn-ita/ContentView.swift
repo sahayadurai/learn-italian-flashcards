@@ -32,7 +32,7 @@ struct ContentView: View {
                 VStack(spacing: 0) {
                     // Header
                     VStack(spacing: 10) {
-                        Text("Learn Italian")
+                        Text("Italian Flashcards")
                             .font(.system(size: 44, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                         
